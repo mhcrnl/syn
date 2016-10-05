@@ -11,7 +11,7 @@ int parse_sconf(server_config_t *cfg, FILE *file)
     while(fgets(buf, 1024, file)){
 	char *delim = strchr(buf, '\t');
 	if(!delim){
-	    debug_n("Invalid attribute: \"%s\"", buf);
+	    debug_fn("Invalid attribute: \"%s\"", buf);
 	    return 1;
 	}
 	*delim = '\0';
@@ -21,7 +21,7 @@ int parse_sconf(server_config_t *cfg, FILE *file)
 	    ++val;
 	}
 	/* convert and assign value based on attrib */
-	debug_n("Encountered attribute %s of value %s", attrib, val);
+	debug_fn("Encountered attribute %s of value %s", attrib, val);
     }
     return 0;
 }
@@ -33,7 +33,7 @@ int parse_cconf(client_config_t *cfg, FILE *file)
     while(fgets(buf, 1024, file)){
 	char *delim = strchr(buf, '\t');
 	if(!delim){
-	    debug_n("Invalid attribute: \"%s\"", buf);
+	    debug_fn("Invalid attribute: \"%s\"", buf);
 	    return 1;
 	}
 	*delim = '\0';
@@ -42,7 +42,7 @@ int parse_cconf(client_config_t *cfg, FILE *file)
 	while(isspace(*val)){
 	    ++val;
 	}
-	debug_n("Encountered attribute %s of value %s", attrib, val);
+	debug_fn("Encountered attribute %s of value %s", attrib, val);
     }
     return 0;
 }

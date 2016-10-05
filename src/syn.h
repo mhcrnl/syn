@@ -9,12 +9,17 @@
 #define u(x) ((void)(x))
 
 #ifdef DEBUG
-#define debug_n(fmt, ...); \
+#define debug_fn(fmt, ...) \
     fputs("DEBUG::> ", stderr); \
     fprintf(stderr, fmt, __VA_ARGS__); \
-    fputc('\n', stderr);
+    fputc('\n', stderr)
+#define debug_n(fmt) \
+    fputs("DEBUG::> ", stderr); \
+    fputs(fmt, stderr); \
+    fputc('\n', stderr)
 #else
-#define debug(fmt, ...)
+#define debug_fn(fmt, ...)
+#define debug_n(fmt)
 #endif
 
 #define pluralize(num) num != 1 ? "s" : ""
