@@ -19,20 +19,24 @@
 
 /* holds data for io transactions */
 struct io {
-    FILE *restrict input;
-    FILE *restrict output;
+    /* input for io */
+    const FILE *restrict in;
+    /* output for io */
+    const FILE *restrict out;
 };
 
 struct location {
+    /* row in editor */
     int row;
+    /* col in editor */
     int col;
 };
 
 struct change_data {
     /* what data was added? */
-    char *chars;
+    const char *chars;
     /* where did this change occur? */
-    struct location loc;
+    const struct location loc;
 };
 
 #endif
