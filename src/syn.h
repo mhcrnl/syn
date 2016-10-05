@@ -2,6 +2,8 @@
 #define __SYN_H__
 
 #include<stdio.h>
+#include<stdint.h>
+#include<stdlib.h>
 #include<uv.h>
 
 #define u(x) ((void)(x))
@@ -17,13 +19,25 @@
 
 #define pluralize(num) num != 1 ? "s" : ""
 
+/* type for unique ids */
+typedef uint32_t uuid_t;
+
 /* holds data for io transactions */
 typedef struct io_s {
-    /* input for io */
     const FILE * in;
-    /* output for io */
+    /* input for io */
     const FILE * out;
+    /* output for io */
 } io_t;
+
+#define MAX_BROADCAST 32
+typedef struct multi_io_s {
+    const FILE *in;
+    /* input for io */
+    const FILE *cast[MAX_BROADCAST];
+    /* files to broadcast input to */
+} multi_io_t;
+#undef MAX_BROADCAST
 
 typedef struct syn_location_s {
     /* row in editor */
