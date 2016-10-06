@@ -42,7 +42,6 @@ typedef struct multi_io_s {
     const FILE *cast[MAX_BROADCAST];
     /* files to broadcast input to */
 } multi_io_t;
-#undef MAX_BROADCAST
 
 typedef struct syn_location_s {
     /* row in editor */
@@ -63,14 +62,21 @@ typedef struct syn_change_data_s {
 
 /* allowances on currently viewed file 
  * If another user is editing the file
- * then this user is not allowed to edit
- */
-typedef struct syn_file_permissions_s {
-    char read: 1;
-    /* can the user view/read this file? */
-    char write: 1;
-    /* can the user write/delete this file? */
-} syn_file_permissions_t;
+ * then this user is not allowed to edit */
+#define READ_P 	1
+#define WRITE_P	2	/* write permissions also allows deleting the file */
+typedef uint32_t fflags_t;
+
+/* file handle to read and write to
+ * obtained through open_file()
+ * and destroyed through close_file() */
+typedef struct syn_file_s {
+    fflags_t flags;
+    /* permissions */
+    uv_file file;	
+    /* file to read and write to */
+    /* TODO change to uv_fs_t or uv_file? */
+} syn_file_t;
 
 /* a client in a session */
 typedef struct syn_client_s {
@@ -84,8 +90,7 @@ typedef struct syn_client_s {
 
 /*
  * A session of syn on the server 
- * Holds pending changes, filesystem info, and a list of clients 
- */
+ * Holds pending changes, filesystem info, and a list of clients */
 typedef struct syn_session_s {
     uv_loop_t *loop;
     /* event loop */

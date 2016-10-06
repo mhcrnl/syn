@@ -10,24 +10,15 @@
 void echo_read(uv_stream_t *stream, ssize_t nread, const uv_buf_t *buf)
 {
     u(stream);
-    if(nread < 0){
-	debug_fn("%s, closing connection", uv_strerror(nread));
-	uv_close((uv_handle_t *)stream, NULL);
-	return;
-    }
-    /* remove \r\n from end of data */
-    if(nread > 2){
-	rmrn(buf->base, nread);
-	debug_fn("Read %d bytes : \"%s\"", (int)nread, buf->base);
-    }
+    u(nread);
+    u(buf);
 }
 
 /* buffer allocation callback */
-void alloc_buffer(uv_handle_t *handle, size_t suggested, uv_buf_t *buf)
+void alloc_buffer(uv_handle_t *handle, size_t def, uv_buf_t *buf)
 {
     u(handle);
-    buf->base = syn_malloc(suggested);
-    buf->len = suggested;
+    uv_buf_init(buf->base, def);
 }
 
 /* client connection callback */
@@ -40,11 +31,12 @@ void on_client_connect(uv_stream_t *server, int status)
     debug_n("Client connected");
 
     uv_tcp_t *client = syn_malloc(sizeof(uv_tcp_t));
-
     uv_tcp_init(uv_default_loop(), client);
     if(!uv_accept(server, (uv_stream_t *)client)){
+	/* the client has been accepted */
 	uv_read_start((uv_stream_t *)client, alloc_buffer, echo_read);
     }else{
+	/* error occured accepting the client */
 	uv_close((uv_handle_t *)client, NULL);
     }
 }
@@ -68,10 +60,10 @@ int main(int argc, char **argv)
     
     /* create sockaddr_in from ip */
     struct sockaddr_in addr;
-    uv_ip4_addr("0.0.0.0", 8765, &addr);
+    uv_ip4_addr("127.0.0.1", 8765, &addr);
     
     /* bind handler to port 8765 and listen for all connections */
-    uv_tcp_bind(&serv_handle, (const struct sockaddr*)&addr, 0);
+    uv_tcp_bind(&serv_handle, (const struct sockaddr *)&addr, 0);
 
     /* the on_client_connect handler will be invoked */
     int r = uv_listen((uv_stream_t *)&serv_handle, 10, on_client_connect);
