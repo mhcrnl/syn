@@ -15,8 +15,11 @@ void echo_read(uv_stream_t *stream, ssize_t nread, const uv_buf_t *buf)
 	uv_close((uv_handle_t *)stream, NULL);
 	return;
     }
-    rmrn(buf->base, nread);
-    debug_fn("Read %d bytes from : \"%s\"", (int)nread, buf->base);
+    /* remove \r\n from end of data */
+    if(nread > 2){
+	rmrn(buf->base, nread);
+	debug_fn("Read %d bytes : \"%s\"", (int)nread, buf->base);
+    }
 }
 
 /* buffer allocation callback */
@@ -54,20 +57,24 @@ int main(int argc, char **argv)
     while((index = (argc - temp--)) < argc){
 	debug_fn("   ARG%d : %s", index, argv[index]);
     }
-
+    
+    /* setup event loop */
     uv_loop_t *loop = uv_default_loop();
     uv_loop_init(loop);
 
-    uv_tcp_t server;
-    uv_tcp_init(loop, &server);
+    /* prepare listener handle */
+    uv_tcp_t serv_handle;
+    uv_tcp_init(loop, &serv_handle);
     
+    /* create sockaddr_in from ip */
     struct sockaddr_in addr;
-
     uv_ip4_addr("0.0.0.0", 8765, &addr);
     
-    uv_tcp_bind(&server, (const struct sockaddr*)&addr, 0);
+    /* bind handler to port 8765 and listen for all connections */
+    uv_tcp_bind(&serv_handle, (const struct sockaddr*)&addr, 0);
 
-    int r = uv_listen((uv_stream_t *)&server, 10, on_client_connect);
+    /* the on_client_connect handler will be invoked */
+    int r = uv_listen((uv_stream_t *)&serv_handle, 10, on_client_connect);
     if(r){
 	debug_fn("Listen error: \"%s\"", uv_strerror(r));
 	return 1;

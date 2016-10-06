@@ -91,6 +91,12 @@ typedef struct syn_session_s {
     /* event loop */
     syn_client_t **clients;
     /* clients in the session */
+    struct {
+	syn_change_data_t *change_data;
+	int size;
+	int cap;
+    } change_queue;
+    /* queue of changes to make */
 } syn_session_t;
 
 #endif
