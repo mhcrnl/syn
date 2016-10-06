@@ -21,7 +21,7 @@ typedef struct server_config_s {
     /* maximum sessions per server */
     unsigned short session_conn_max;
     /* maximum sessions per server */
-    unsigned short change_max;
+    unsigned short change_backlog;
     /* maximum change backlog */
 } server_config_t;
 

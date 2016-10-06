@@ -24,18 +24,22 @@
 
 #define pluralize(num) num != 1 ? "s" : ""
 
+int server_main(int argc, char **argv);
+int client_main(int argc, char **argv);
+
 /* type for unique ids */
 typedef uint32_t uuid_t;
 
 /* holds data for io transactions */
 typedef struct io_s {
-    const FILE * in;
+    const FILE *in;
     /* input for io */
-    const FILE * out;
+    const FILE *out;
     /* output for io */
 } io_t;
 
 #define MAX_BROADCAST 32
+/* type for multicast operations */
 typedef struct multi_io_s {
     const FILE *in;
     /* input for io */
@@ -75,7 +79,7 @@ typedef struct syn_file_s {
     /* permissions */
     uv_file file;	
     /* file to read and write to */
-    /* TODO change to uv_fs_t or uv_file? */
+    /* TODO change to uv_fs_t or uv_file? gotta learn more about libuv */
 } syn_file_t;
 
 /* a client in a session */
@@ -103,5 +107,19 @@ typedef struct syn_session_s {
     } change_queue;
     /* queue of changes to make */
 } syn_session_t;
+
+/* gap buffer for text editing */
+typedef struct syn_gbuffer_s {
+    char *buffer;
+    /* actual data in the buffer */
+    size_t gap_start;
+    /* start of the gap */
+    size_t gap_end;
+    /* end of the gap */
+    size_t capacity;
+    /* memory size of the buffer */
+    size_t size;
+    /* amount of characters in the buffer */
+} syn_gbuffer_t;
 
 #endif
