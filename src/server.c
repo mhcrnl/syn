@@ -43,12 +43,14 @@ void on_client_connect(uv_stream_t *server, int status)
 
 int server_main(int argc, char **argv)
 {
+#ifdef DEBUG
     debug_fn("Starting with %d argument%s", argc, pluralize(argc));
     int temp = argc;
     int index;
     while((index = (argc - temp--)) < argc){
 	debug_fn("   ARG%d : %s", index, argv[index]);
     }
+#endif
     
     /* setup event loop */
     uv_loop_t *loop = uv_default_loop();
@@ -60,7 +62,7 @@ int server_main(int argc, char **argv)
     
     /* create sockaddr_in from ip */
     struct sockaddr_in addr;
-    uv_ip4_addr("127.0.0.1", 8765, &addr);
+    uv_ip4_addr("0.0.0.0", SERVER_DEFAULT_PORT, &addr);
     
     /* bind handler to port 8765 and listen for all connections */
     uv_tcp_bind(&serv_handle, (const struct sockaddr *)&addr, 0);

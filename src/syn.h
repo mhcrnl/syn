@@ -22,6 +22,10 @@
 #define debug_n(fmt)
 #endif
 
+#define SERVER_DEFAULT_PORT 8765
+
+#define fatal(x) fputs(stderr, x "\n"); exit(1);
+
 #define pluralize(num) num != 1 ? "s" : ""
 
 int server_main(int argc, char **argv);
@@ -69,7 +73,7 @@ typedef struct syn_change_data_s {
  * then this user is not allowed to edit */
 #define READ_P 	1
 #define WRITE_P	2	/* write permissions also allows deleting the file */
-typedef uint32_t fflags_t;
+typedef uint8_t fflags_t;
 
 /* file handle to read and write to
  * obtained through open_file()
@@ -102,6 +106,8 @@ typedef struct syn_session_s {
     /* clients in the session */
     struct {
 	syn_change_data_t *change_data;
+	int head;
+	int tail;
 	int size;
 	int cap;
     } change_queue;
@@ -113,9 +119,9 @@ typedef struct syn_gbuffer_s {
     char *buffer;
     /* actual data in the buffer */
     size_t gap_start;
-    /* start of the gap */
+    /* start of the gap, points to first invalid character in gap */
     size_t gap_end;
-    /* end of the gap */
+    /* end of the gap, points to first valid character after gap */
     size_t capacity;
     /* memory size of the buffer */
     size_t size;
