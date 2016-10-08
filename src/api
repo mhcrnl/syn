@@ -1,0 +1,6 @@
+Syn API
+
+Operations:
+    JOIN	/* join a session */
+    CREATE	/* create a new session */
+    SEND	/* send a change about a file */

@@ -60,11 +60,11 @@ typedef struct syn_location_s {
 
 /* How changes made to the source file will be stored */
 typedef struct syn_change_data_s {
-    const char *chars;
+    char *chars;
     /* what data was added? */
-    const char *file;
+    char *file;
     /* what file was changed? */
-    const syn_location_t loc;
+    syn_location_t loc;
     /* where did this change occur in the buffer? */
 } syn_change_data_t;
 
@@ -88,6 +88,15 @@ typedef struct syn_file_s {
 
 /********************SERVER********************/
 
+typedef struct syn_session_s syn_session_t;
+
+/* server context */
+typedef struct syn_server_ctx_s {
+    syn_session_t *sessions;
+    /* active sessions */
+    uv_thread_t *session_threads;
+} syn_server_ctx_t;
+
 /* a client in a session */
 typedef struct syn_client_s {
     uv_tcp_t *handle;
@@ -102,6 +111,8 @@ typedef struct syn_client_s {
  * A session of syn on the server 
  * Holds pending changes, filesystem info, and a list of clients */
 typedef struct syn_session_s {
+    uuid_t session_id;
+    /* session id */
     uv_loop_t *loop;
     /* event loop */
     syn_client_t **clients;
@@ -117,27 +128,42 @@ typedef struct syn_session_s {
 } syn_session_t;
 
 typedef enum syn_message_type_e {
-
+    JOIN = 0,
+    CREATE
 } syn_message_type_t;
 
 typedef struct syn_message_s {
-    uuid_t message_id;
     /* message id, used for response */
     syn_message_type_t type;
     /* type of the message */
-    union {
+    union syn_message_data_u {
+	struct {
+
+	} session_create_data;   
 	struct {
 	
-	} create_data;   
+	} session_join_data;
 	struct {
 	
-	} join_data;
+	} request_file_data;
+	struct {
+	    syn_change_data_t change;
+	} new_change_data;
     } data;
     /* message data */
 } syn_message_t;
 
+/* ring buffer as queue implementation */
+#define MAX_MESSAGES 128
 typedef struct syn_message_queue_s {
-    
+    syn_message_t *data;
+    /* messages in queue */
+    int size;
+    /* buffer size */
+    int head;
+    /* head of the buffer */
+    int tail;
+    /* tail of the buffer */
 } syn_message_queue_t;
 
 /********************TEXT EDITOR********************/
@@ -158,3 +184,4 @@ typedef struct syn_gbuffer_s {
     /* cursor position */
 } syn_gbuffer_t;
 
+#endif
