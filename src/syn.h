@@ -86,6 +86,8 @@ typedef struct syn_file_s {
     /* TODO change to uv_fs_t or uv_file? gotta learn more about libuv */
 } syn_file_t;
 
+/********************SERVER********************/
+
 /* a client in a session */
 typedef struct syn_client_s {
     uv_tcp_t *handle;
@@ -114,18 +116,45 @@ typedef struct syn_session_s {
     /* queue of changes to make */
 } syn_session_t;
 
+typedef enum syn_message_type_e {
+
+} syn_message_type_t;
+
+typedef struct syn_message_s {
+    uuid_t message_id;
+    /* message id, used for response */
+    syn_message_type_t type;
+    /* type of the message */
+    union {
+	struct {
+	
+	} create_data;   
+	struct {
+	
+	} join_data;
+    } data;
+    /* message data */
+} syn_message_t;
+
+typedef struct syn_message_queue_s {
+    
+} syn_message_queue_t;
+
+/********************TEXT EDITOR********************/
+
 /* gap buffer for text editing */
 typedef struct syn_gbuffer_s {
     char *buffer;
-    /* actual data in the buffer */
-    size_t gap_start;
+    /* buffer (no shit) */
+    int gap_start;
     /* start of the gap, points to first invalid character in gap */
-    size_t gap_end;
+    int gap_end;
     /* end of the gap, points to first valid character after gap */
-    size_t capacity;
+    int capacity;
     /* memory size of the buffer */
-    size_t size;
+    int size;
     /* amount of characters in the buffer */
+    int cursor;
+    /* cursor position */
 } syn_gbuffer_t;
 
-#endif
