@@ -14,7 +14,7 @@ void syn_gbuffer_insert_str(syn_gbuffer_t *buffer, char *str);
 /* delete character from buffer */
 char syn_gbuffer_delete(syn_gbuffer_t *buffer);
 /* draw a buffer */
-void syn_gbuffer_walk(syn_gbuffer_t *buffer, void(*per)(char), void(*after)());
+void syn_gbuffer_walk(syn_gbuffer_t *buffer, void(*per)(char, int));
 /* destroy a buffer */
 void syn_gbuffer_destroy(syn_gbuffer_t *buffer);
 

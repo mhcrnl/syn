@@ -104,15 +104,15 @@ char syn_gbuffer_delete(syn_gbuffer_t *buffer)
     return buffer->buffer[buffer->gap_start + 1];
 }
 
-void syn_gbuffer_walk(syn_gbuffer_t *buffer, void(*per)(char), void(*after)())
+void syn_gbuffer_walk(syn_gbuffer_t *buffer, void(*per)(char, int))
 {
-    for(int i = 0; i < buffer->capacity; ++i){
+    int location = 0;
+    for(int i = 0; i < buffer->capacity; ++i, ++location){
 	if(i == buffer->gap_start){
 	    i = buffer->gap_end;
 	}
-	per(buffer->buffer[i]);
+	per(buffer->buffer[i], location);
     }
-    after();
 }
 
 void syn_gbuffer_destroy(syn_gbuffer_t *buffer)
