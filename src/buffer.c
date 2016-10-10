@@ -89,20 +89,25 @@ void syn_gbuffer_insert(syn_gbuffer_t *buffer, char c)
 
 void syn_gbuffer_insert_str(syn_gbuffer_t *buffer, char *str)
 {
-    u(buffer);
-    u(str);
+    if(!str){
+	return;
+    }
+    do{
+	syn_gbuffer_insert(buffer, *str);
+    }while(*++str);
 }
 
-char syn_gbuffer_delete(syn_gbuffer_t *buffer)
+void syn_gbuffer_delete(syn_gbuffer_t *buffer)
 {
     /* move gap to position provided, then 
        move the start of the gap back one character */
     /* TODO what to do if the start is at 0? */
     /* move gap_start back one character */
     move_gap(buffer, buffer->cursor);
-    --buffer->gap_start;
-    --buffer->size;
-    return buffer->buffer[buffer->gap_start + 1];
+    if(buffer->cursor > 0){
+	--buffer->gap_start;
+	--buffer->size;
+    }
 }
 
 void syn_gbuffer_walk(syn_gbuffer_t *buffer, void(*per)(char, int))

@@ -7,6 +7,8 @@
 #include"syn.h"
 #include"buffer.h"
 
+/******************SCREEN*****************/
+
 #define KEY_ESC 27
 
 static on_keypress_cb on_keypress = NULL;
@@ -37,6 +39,11 @@ static void draw_char(char c, int l)
 void do_key(int key)
 {
     switch(key){
+    case KEY_BACKSPACE:
+	syn_gbuffer_delete(_buffer);
+	syn_gbuffer_advance_cursor(_buffer, -1);
+	clear();
+	break;
     case KEY_LEFT:
 	syn_gbuffer_advance_cursor(_buffer, -1);
 	return;
