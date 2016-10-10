@@ -7,6 +7,8 @@
 syn_gbuffer_t *syn_gbuffer_create();
 /* move cursor to position in the buffer */
 void syn_gbuffer_move_cursor(syn_gbuffer_t *buffer, int to);
+/* move cursor x step(s) */
+void syn_gbuffer_advance_cursor(syn_gbuffer_t *buffer, int i);
 /* insert character into buffer */
 void syn_gbuffer_insert(syn_gbuffer_t *buffer, char c);
 /* insert string into buffer */

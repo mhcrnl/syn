@@ -16,7 +16,6 @@ syn_gbuffer_t *syn_gbuffer_create()
     /* gap start and end */
     ret->gap_start = 0;
     ret->gap_end = DEFAULT_CAPACITY - 1;
-    debug_fn("Initial gap: [%d, %d]", ret->gap_start, ret->gap_end);
     return ret;
 }
 #undef DEFAULT_CAPACITY
@@ -39,7 +38,6 @@ static inline void move_gap(syn_gbuffer_t *buffer, int to)
 	buffer->gap_start -= distance;
 	buffer->gap_end -= distance;
     }else{
-	debug_n("Forwards");
 	/* moving to location after gap, therefore, we need actual location */
 	int character_loc = to + gap_len;
 	/* because gap_end points to first valid character after gap */
@@ -62,14 +60,17 @@ void syn_gbuffer_move_cursor(syn_gbuffer_t *buffer, int to)
     }
 }
 
+void syn_gbuffer_advance_cursor(syn_gbuffer_t *buffer, int i)
+{
+    syn_gbuffer_move_cursor(buffer, buffer->cursor + i);
+}
+
 /* new gap allocation size */
 #define GAP_SIZE 128
 void syn_gbuffer_insert(syn_gbuffer_t *buffer, char c)
 {
-    debug_fn("Inserting %c at cursor: %d", c, buffer->cursor);
     move_gap(buffer, buffer->cursor);
     if(buffer->gap_end - buffer->gap_start == 0){
-	debug_n("Reallocating gbuffer");
 	/* realloc new gap */
 	buffer->buffer = syn_realloc(buffer->buffer, 
 				     buffer->capacity + GAP_SIZE);
@@ -107,7 +108,9 @@ char syn_gbuffer_delete(syn_gbuffer_t *buffer)
 void syn_gbuffer_walk(syn_gbuffer_t *buffer, void(*per)(char, int))
 {
     int location = 0;
-    for(int i = 0; i < buffer->capacity; ++i, ++location){
+    for(int i = 0; 
+	location < buffer->size && i < buffer->capacity; 
+	++i, ++location){
 	if(i == buffer->gap_start){
 	    i = buffer->gap_end;
 	}
@@ -122,5 +125,4 @@ void syn_gbuffer_destroy(syn_gbuffer_t *buffer)
 	syn_free(buffer);
 	return;
     }
-    debug_n("Attempt to destroy a null gbuffer");
 }
