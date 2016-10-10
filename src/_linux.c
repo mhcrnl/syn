@@ -12,13 +12,14 @@
 
 /******************SCREEN*****************/
 
+/* escape used to quit editor */
 #define KEY_ESC 27
 
 void syn_screen_init()
 {
     /* set escape delay to zero */
     if(!getenv("ESCDELAY")){
-	putenv("ESCDELAY=25");
+	putenv("ESCDELAY=0");
     }
 
     initscr();
