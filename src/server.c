@@ -10,15 +10,20 @@
 void echo_read(uv_stream_t *stream, ssize_t nread, const uv_buf_t *buf)
 {
     u(stream);
-    u(nread);
-    u(buf);
+    if(nread < 0){
+	debug_fn("Error reading from stream: %s", uv_strerror(nread));
+	uv_close((uv_handle_t *)stream, NULL);
+	return;
+    }
+    debug_fn("Received %s", buf->base);
 }
 
 /* buffer allocation callback */
 void alloc_buffer(uv_handle_t *handle, size_t def, uv_buf_t *buf)
 {
     u(handle);
-    uv_buf_init(buf->base, def);
+    buf->base = syn_malloc(def);
+    buf->len = def;
 }
 
 /* client connection callback */
