@@ -32,7 +32,7 @@ int server_main(int argc, char **argv);
 int client_main(int argc, char **argv);
 
 /* type for unique ids */
-typedef uint32_t uuid_t;
+typedef uint32_t syn_uuid_t;
 
 /* holds data for io transactions */
 typedef struct io_s {
@@ -103,7 +103,7 @@ typedef struct syn_client_s {
     /* handle to client socket */
     char *name;
     /* client nickname */
-    uuid_t id;
+    syn_uuid_t id;
     /* 32 bit client id  */
 } syn_client_t;
 
@@ -111,7 +111,7 @@ typedef struct syn_client_s {
  * A session of syn on the server 
  * Holds pending changes, filesystem info, and a list of clients */
 typedef struct syn_session_s {
-    uuid_t session_id;
+    syn_uuid_t session_id;
     /* session id */
     uv_loop_t *loop;
     /* event loop */

@@ -43,7 +43,7 @@ int client_main(int argc, char **argv)
     if(argc != 3){
 	usage();
     }
-    uuid_t session_id = atoi(argv[1]);	/* get session id */
+    syn_uuid_t session_id = atoi(argv[1]);	/* get session id */
     char *host_ip = argv[2];		/* get host ip */
 
     struct sockaddr_in addr;		/* server address */
