@@ -1,3 +1,6 @@
+/* _LINUX.C
+ * This file contains linux-specific code
+ */
 #include"_linux.h"
 
 #include<unistd.h>
@@ -11,10 +14,7 @@
 
 #define KEY_ESC 27
 
-static on_keypress_cb on_keypress = NULL;
-static syn_gbuffer_t *_buffer;
-
-void syn_screen_init(syn_gbuffer_t *buffer)
+void syn_screen_init()
 {
     /* set escape delay to zero */
     if(!getenv("ESCDELAY")){
@@ -26,67 +26,39 @@ void syn_screen_init(syn_gbuffer_t *buffer)
     cbreak();
     keypad(stdscr, TRUE);
     nodelay(stdscr, TRUE);
-    /* set internal buffer */
-    _buffer = buffer;
 }
 
-static void draw_char(char c, int l)
-{
-    u(l);
-    addch(c);
-}
-
-void do_key(int key)
+int do_key(int key)
 {
     switch(key){
+    case KEY_ESC:
+	return 1;
     case KEY_BACKSPACE:
-	syn_gbuffer_delete(_buffer);
-	syn_gbuffer_advance_cursor(_buffer, -1);
-	clear();
-	break;
+	return 0;
     case KEY_LEFT:
-	syn_gbuffer_advance_cursor(_buffer, -1);
-	return;
+	return 0;
     case KEY_RIGHT:
-	syn_gbuffer_advance_cursor(_buffer, 1);
-	return;
-    /* TODO implement a better system for navigation */
+	return 0;
     case KEY_UP:
-	break;
+	return 0;
     case KEY_DOWN:
-	break;
-    default:
-	on_keypress(key, _buffer);
-	break;
+	return 0;
+    default:	/* supposedly an alphanumeric character */
+	return 0;
     }
+    return 0;
 }
 
-void syn_screen_update()
+int syn_screen_update()
 {
-    if(!_buffer){
-	debug_n("ERROR");
-	return;
-    }
     int ch = 0;
-    while(1){
-	refresh();
-	if((ch = getch()) != ERR){
-	    refresh();
-	    if(ch == KEY_ESC){
-		return;
-	    }
-	    do_key(ch);
-	    move(0, 0);
-	    syn_gbuffer_walk(_buffer, draw_char);
+    if((ch = getch()) != ERR){
+	if(do_key(ch)){
+	    return 1;
 	}
-	move(0, _buffer->cursor);
-	usleep(16666);
+	refresh();
     }
-}
-
-void syn_screen_on_keypress(on_keypress_cb cb)
-{
-    on_keypress = cb;
+    return 0;
 }
 
 void syn_screen_destroy()
