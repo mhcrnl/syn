@@ -13,8 +13,10 @@ void echo_read(uv_stream_t *stream, ssize_t nread, const uv_buf_t *buf)
     if(nread < 0){
 	debug_fn("Error reading from stream: %s", uv_strerror(nread));
 	uv_close((uv_handle_t *)stream, NULL);
+	syn_free(stream);
 	return;
     }
+    buf->base[nread - (nread > 2 ? 2 : 0)] = '\0';
     debug_fn("Received %s", buf->base);
 }
 
@@ -43,6 +45,7 @@ void on_client_connect(uv_stream_t *server, int status)
     }else{
 	/* error occured accepting the client */
 	uv_close((uv_handle_t *)client, NULL);
+	syn_free(client);
     }
 }
 

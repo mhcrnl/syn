@@ -1,8 +1,3 @@
-#include<uv.h>
-#include<math.h>
-#include<string.h>
-#include<unistd.h>
-
 #include"syn.h"
 #include"mem.h"
 #include"buffer.h"
@@ -12,12 +7,11 @@
 
 int client_main(int argc, char **argv)
 {
-    debug_n("Running client");
     u(argv);
     if(argc < 3){
 	usage();
     }
-    
+
     syn_screen_init();
 
     while(!syn_screen_update());
