@@ -23,6 +23,7 @@
 #endif
 
 #define SERVER_DEFAULT_PORT 8765
+#define SERVER_DEFAULT_IP "0.0.0.0"
 
 #define fatal(x) fputs(stderr, x "\n"); exit(1);
 

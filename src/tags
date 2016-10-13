@@ -1,0 +1,175 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+CFLAGS	makefile	/^CFLAGS=-Wall -Wextra -std=gnu11 -DDEBUG$/;"	m
+CHECK_RET	mem.c	3;"	d	file:
+CREATE	syn.h	/^    CREATE$/;"	e	enum:syn_message_type_e
+DEFAULT_CAPACITY	buffer.c	21;"	d	file:
+DEFAULT_CAPACITY	buffer.c	7;"	d	file:
+GAP_SIZE	buffer.c	69;"	d	file:
+GAP_SIZE	buffer.c	88;"	d	file:
+JOIN	syn.h	/^    JOIN = 0,$/;"	e	enum:syn_message_type_e
+KEY_ESC	_linux.c	16;"	d	file:
+LIBS	makefile	/^LIBS=-luv -lncurses$/;"	m
+MAX_BROADCAST	syn.h	45;"	d
+MAX_MESSAGES	syn.h	157;"	d
+OBJECTS	makefile	/^OBJECTS=$(SOURCES:.c=.o)$/;"	m
+READ_P	syn.h	74;"	d
+SERVER_DEFAULT_PORT	syn.h	25;"	d
+SOURCES	makefile	/^SOURCES=$(wildcard *.c)$/;"	m
+WRITE_P	syn.h	75;"	d
+__BUFFER_H__	buffer.h	8;"	d
+__CONFIG_H__	config.h	2;"	d
+__FILEIO_H_	fileio.h	2;"	d
+__LINUX_H__	_linux.h	2;"	d
+__MEM_H__	mem.h	2;"	d
+__MESSAGE_H__	message.h	2;"	d
+__SCREEN_H__	screen.h	2;"	d
+__SESSION_H__	session.h	2;"	d
+__SYN_H__	syn.h	2;"	d
+alloc_buffer	server.c	/^void alloc_buffer(uv_handle_t *handle, size_t def, uv_buf_t *buf)$/;"	f
+buffer	_linux.h	/^    syn_gbuffer_t *buffer;$/;"	m	struct:syn_display_buffer_s
+buffer	syn.h	/^    char *buffer;$/;"	m	struct:syn_gbuffer_s
+cap	syn.h	/^	int cap;$/;"	m	struct:syn_session_s::__anon1
+capacity	syn.h	/^    int capacity;$/;"	m	struct:syn_gbuffer_s
+cast	syn.h	/^    const FILE *cast[MAX_BROADCAST];$/;"	m	struct:multi_io_s
+change	syn.h	/^	    syn_change_data_t change;$/;"	m	struct:syn_message_s::syn_message_data_u::__anon5
+change_backlog	config.h	/^    unsigned short change_backlog;$/;"	m	struct:server_config_s
+change_data	syn.h	/^	syn_change_data_t *change_data;$/;"	m	struct:syn_session_s::__anon1
+change_queue	syn.h	/^    } change_queue;$/;"	m	struct:syn_session_s	typeref:struct:syn_session_s::__anon1
+chars	syn.h	/^    char *chars;$/;"	m	struct:syn_change_data_s
+client_config_s	config.h	/^typedef struct client_config_s {$/;"	s
+client_config_t	config.h	/^} client_config_t;$/;"	t	typeref:struct:client_config_s
+client_main	client.c	/^int client_main(int argc, char **argv)$/;"	f
+clients	syn.h	/^    syn_client_t **clients;$/;"	m	struct:syn_session_s
+col	syn.h	/^    int col;$/;"	m	struct:syn_location_s
+cols	_linux.h	/^    int cols;$/;"	m	struct:syn_display_buffer_s
+conn_max	config.h	/^    unsigned short conn_max;$/;"	m	struct:server_config_s
+cursor	syn.h	/^    int cursor;$/;"	m	struct:syn_gbuffer_s
+cursor_loc	_linux.h	/^    syn_location_t cursor_loc;$/;"	m	struct:syn_display_buffer_s
+data	syn.h	/^    syn_message_t *data;$/;"	m	struct:syn_message_queue_s
+data	syn.h	/^    } data;$/;"	m	struct:syn_message_s	typeref:union:syn_message_s::syn_message_data_u
+debug_fn	syn.h	12;"	d
+debug_fn	syn.h	21;"	d
+debug_n	syn.h	16;"	d
+debug_n	syn.h	22;"	d
+dirty	_linux.h	/^    int dirty;$/;"	m	struct:syn_display_buffer_s
+display	_linux.h	/^    syn_display_buffer_t *display;$/;"	m	struct:syn_editor_ctx_s
+do_key	_linux.c	/^int do_key(int key)$/;"	f
+echo_read	server.c	/^void echo_read(uv_stream_t *stream, ssize_t nread, const uv_buf_t *buf)$/;"	f
+editor_config	config.h	/^    char *editor_config;$/;"	m	struct:client_config_s
+fatal	syn.h	27;"	d
+fflags_t	syn.h	/^typedef uint8_t fflags_t;$/;"	t
+file	syn.h	/^    char *file;$/;"	m	struct:syn_change_data_s
+file	syn.h	/^    uv_file file;	$/;"	m	struct:syn_file_s
+flags	syn.h	/^    fflags_t flags;$/;"	m	struct:syn_file_s
+gap_end	syn.h	/^    int gap_end;$/;"	m	struct:syn_gbuffer_s
+gap_start	syn.h	/^    int gap_start;$/;"	m	struct:syn_gbuffer_s
+handle	syn.h	/^    uv_tcp_t *handle;$/;"	m	struct:syn_client_s
+head	syn.h	/^	int head;$/;"	m	struct:syn_session_s::__anon1
+head	syn.h	/^    int head;$/;"	m	struct:syn_message_queue_s
+id	syn.h	/^    syn_uuid_t id;$/;"	m	struct:syn_client_s
+in	syn.h	/^    const FILE *in;$/;"	m	struct:io_s
+in	syn.h	/^    const FILE *in;$/;"	m	struct:multi_io_s
+io_s	syn.h	/^typedef struct io_s {$/;"	s
+io_t	syn.h	/^} io_t;$/;"	t	typeref:struct:io_s
+loc	syn.h	/^    syn_location_t loc;$/;"	m	struct:syn_change_data_s
+log_file	config.h	/^    char *log_file;$/;"	m	struct:client_config_s
+loop	server.c	/^static uv_loop_t *loop;$/;"	v	file:
+loop	syn.h	/^    uv_loop_t *loop;$/;"	m	struct:syn_session_s
+main	main.c	/^int main(int argc, char **argv)$/;"	f
+move_gap	buffer.c	/^static inline void move_gap(syn_gbuffer_t *buffer, int to)$/;"	f	file:
+multi_io_s	syn.h	/^typedef struct multi_io_s {$/;"	s
+multi_io_t	syn.h	/^} multi_io_t;$/;"	t	typeref:struct:multi_io_s
+name	syn.h	/^    char *name;$/;"	m	struct:syn_client_s
+new_change_data	syn.h	/^	} new_change_data;$/;"	m	union:syn_message_s::syn_message_data_u	typeref:struct:syn_message_s::syn_message_data_u::__anon5
+next	_linux.h	/^    syn_display_buffer_t *next;$/;"	m	struct:syn_display_buffer_s
+num_buffers	_linux.h	/^    int num_buffers;$/;"	m	struct:syn_editor_ctx_s
+on_client_connect	server.c	/^void on_client_connect(uv_stream_t *server_stream, int status)$/;"	f
+on_close	server.c	/^void on_close(uv_handle_t *handle)$/;"	f
+out	syn.h	/^    const FILE *out;$/;"	m	struct:io_s
+parse_cconf	config.c	/^int parse_cconf(client_config_t *cfg, FILE *file)$/;"	f
+parse_sconf	config.c	/^int parse_sconf(server_config_t *cfg, FILE *file)$/;"	f
+pluralize	syn.h	29;"	d
+port	config.h	/^    unsigned short port;$/;"	m	struct:server_config_s
+prev	_linux.h	/^    syn_display_buffer_t *prev;$/;"	m	struct:syn_display_buffer_s
+request_file_data	syn.h	/^	} request_file_data;$/;"	m	union:syn_message_s::syn_message_data_u	typeref:struct:syn_message_s::syn_message_data_u::__anon4
+rmrn	server.c	7;"	d	file:
+row	syn.h	/^    int row;$/;"	m	struct:syn_location_s
+rows	_linux.h	/^    int rows;$/;"	m	struct:syn_display_buffer_s
+server_config_s	config.h	/^typedef struct server_config_s {$/;"	s
+server_config_t	config.h	/^} server_config_t;$/;"	t	typeref:struct:server_config_s
+server_handle	server.c	/^static uv_tcp_t *server_handle;$/;"	v	file:
+server_main	server.c	/^int server_main(int argc, char **argv)$/;"	f
+session_conn_max	config.h	/^    unsigned short session_conn_max;$/;"	m	struct:server_config_s
+session_create_data	syn.h	/^	} session_create_data;   $/;"	m	union:syn_message_s::syn_message_data_u	typeref:struct:syn_message_s::syn_message_data_u::__anon2
+session_id	syn.h	/^    syn_uuid_t session_id;$/;"	m	struct:syn_session_s
+session_join_data	syn.h	/^	} session_join_data;$/;"	m	union:syn_message_s::syn_message_data_u	typeref:struct:syn_message_s::syn_message_data_u::__anon3
+session_max	config.h	/^    unsigned short session_max;$/;"	m	struct:server_config_s
+session_threads	syn.h	/^    uv_thread_t *session_threads;$/;"	m	struct:syn_server_ctx_s
+sessions	syn.h	/^    syn_session_t *sessions;$/;"	m	struct:syn_server_ctx_s
+size	syn.h	/^	int size;$/;"	m	struct:syn_session_s::__anon1
+size	syn.h	/^    int size;$/;"	m	struct:syn_gbuffer_s
+size	syn.h	/^    int size;$/;"	m	struct:syn_message_queue_s
+syn_calloc	mem.c	/^void *syn_calloc(size_t size, size_t bytes)$/;"	f
+syn_change_data_s	syn.h	/^typedef struct syn_change_data_s {$/;"	s
+syn_change_data_t	syn.h	/^} syn_change_data_t;$/;"	t	typeref:struct:syn_change_data_s
+syn_client_s	syn.h	/^typedef struct syn_client_s {$/;"	s
+syn_client_t	syn.h	/^} syn_client_t;$/;"	t	typeref:struct:syn_client_s
+syn_display_buffer_s	_linux.h	/^typedef struct syn_display_buffer_s {$/;"	s
+syn_display_buffer_t	_linux.h	/^typedef struct syn_display_buffer_s syn_display_buffer_t;$/;"	t	typeref:struct:syn_display_buffer_s
+syn_display_buffer_t	_linux.h	/^} syn_display_buffer_t;$/;"	t	typeref:struct:syn_display_buffer_s
+syn_editor_ctx_s	_linux.h	/^typedef struct syn_editor_ctx_s {$/;"	s
+syn_editor_ctx_t	_linux.h	/^} syn_editor_ctx_t;$/;"	t	typeref:struct:syn_editor_ctx_s
+syn_file_s	syn.h	/^typedef struct syn_file_s {$/;"	s
+syn_file_t	syn.h	/^} syn_file_t;$/;"	t	typeref:struct:syn_file_s
+syn_free	mem.c	/^void syn_free(void *bytes)$/;"	f
+syn_gbuffer_advance_cursor	buffer.c	/^void syn_gbuffer_advance_cursor(syn_gbuffer_t *buffer, int i)$/;"	f
+syn_gbuffer_create	buffer.c	/^syn_gbuffer_t *syn_gbuffer_create()$/;"	f
+syn_gbuffer_delete	buffer.c	/^void syn_gbuffer_delete(syn_gbuffer_t *buffer)$/;"	f
+syn_gbuffer_destroy	buffer.c	/^void syn_gbuffer_destroy(syn_gbuffer_t *buffer)$/;"	f
+syn_gbuffer_insert	buffer.c	/^void syn_gbuffer_insert(syn_gbuffer_t *buffer, char c)$/;"	f
+syn_gbuffer_insert_str	buffer.c	/^void syn_gbuffer_insert_str(syn_gbuffer_t *buffer, char *str)$/;"	f
+syn_gbuffer_move_cursor	buffer.c	/^void syn_gbuffer_move_cursor(syn_gbuffer_t *buffer, int to)$/;"	f
+syn_gbuffer_s	syn.h	/^typedef struct syn_gbuffer_s {$/;"	s
+syn_gbuffer_t	syn.h	/^} syn_gbuffer_t;$/;"	t	typeref:struct:syn_gbuffer_s
+syn_gbuffer_walk	buffer.c	/^void syn_gbuffer_walk(syn_gbuffer_t *buffer, void(*per)(char, int))$/;"	f
+syn_location_s	syn.h	/^typedef struct syn_location_s {$/;"	s
+syn_location_t	syn.h	/^} syn_location_t;$/;"	t	typeref:struct:syn_location_s
+syn_malloc	mem.c	/^void *syn_malloc(size_t bytes)$/;"	f
+syn_message_create	message.c	/^syn_message_t *syn_message_create(syn_message_type_t type)$/;"	f
+syn_message_data_u	syn.h	/^    union syn_message_data_u {$/;"	u	struct:syn_message_s
+syn_message_destroy	message.c	/^void syn_message_destroy(syn_message_t *message)$/;"	f
+syn_message_queue_create	message.c	/^syn_message_queue_t *syn_message_queue_create()$/;"	f
+syn_message_queue_destroy	message.c	/^void syn_message_queue_destroy(syn_message_queue_t *queue)$/;"	f
+syn_message_queue_pop	message.c	/^int syn_message_queue_pop(syn_message_queue_t *queue, syn_message_t *result)$/;"	f
+syn_message_queue_push	message.c	/^int syn_message_queue_push(syn_message_queue_t *queue, syn_message_t message)$/;"	f
+syn_message_queue_s	syn.h	/^typedef struct syn_message_queue_s {$/;"	s
+syn_message_queue_t	syn.h	/^} syn_message_queue_t;$/;"	t	typeref:struct:syn_message_queue_s
+syn_message_s	syn.h	/^typedef struct syn_message_s {$/;"	s
+syn_message_t	syn.h	/^} syn_message_t;$/;"	t	typeref:struct:syn_message_s
+syn_message_type_e	syn.h	/^typedef enum syn_message_type_e {$/;"	g
+syn_message_type_t	syn.h	/^} syn_message_type_t;$/;"	t	typeref:enum:syn_message_type_e
+syn_realloc	mem.c	/^void *syn_realloc(void *data, size_t size)$/;"	f
+syn_screen_destroy	_linux.c	/^void syn_screen_destroy()$/;"	f
+syn_screen_init	_linux.c	/^void syn_screen_init()$/;"	f
+syn_screen_update	_linux.c	/^int syn_screen_update()$/;"	f
+syn_serialize_message	message.c	/^int syn_serialize_message(syn_message_t *message, void *dest, size_t size)$/;"	f
+syn_server_ctx_s	syn.h	/^typedef struct syn_server_ctx_s {$/;"	s
+syn_server_ctx_t	syn.h	/^} syn_server_ctx_t;$/;"	t	typeref:struct:syn_server_ctx_s
+syn_session_create	session.c	/^syn_session_t *syn_session_create()$/;"	f
+syn_session_destroy	session.c	/^void syn_session_destroy(syn_session_t *syn_session)$/;"	f
+syn_session_s	syn.h	/^typedef struct syn_session_s {$/;"	s
+syn_session_start	session.c	/^void syn_session_start(syn_session_t *syn_session)$/;"	f
+syn_session_t	syn.h	/^typedef struct syn_session_s syn_session_t;$/;"	t	typeref:struct:syn_session_s
+syn_session_t	syn.h	/^} syn_session_t;$/;"	t	typeref:struct:syn_session_s
+syn_uuid_t	syn.h	/^typedef uint32_t syn_uuid_t;$/;"	t
+tail	syn.h	/^	int tail;$/;"	m	struct:syn_session_s::__anon1
+tail	syn.h	/^    int tail;$/;"	m	struct:syn_message_queue_s
+timeout	config.h	/^    long timeout;$/;"	m	struct:client_config_s
+type	syn.h	/^    syn_message_type_t type;$/;"	m	struct:syn_message_s
+u	syn.h	9;"	d
+usage	client.c	6;"	d	file:

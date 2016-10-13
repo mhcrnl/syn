@@ -1,7 +1,14 @@
+/* BUFFER.H
+ *
+ * Defines the interface for interacting with syn_gbuffer_t
+ */
+
+
 #ifndef __BUFFER_H__
 #define __BUFFER_H__
 
 #include"syn.h"
+
 
 /* create a buffer */
 syn_gbuffer_t *syn_gbuffer_create();
